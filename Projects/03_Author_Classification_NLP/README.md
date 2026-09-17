@@ -1,5 +1,3 @@
----
-
 # Author Classification using NLP
 
 소설 텍스트 데이터를 활용하여 **텍스트의 작가를 분류하는 NLP 프로젝트**입니다.
