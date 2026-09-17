@@ -12,7 +12,7 @@
 | Bank Marketing Hackathon       | 금융기관 고객의 정기예금 가입 여부 예측             | Classification, Imbalanced Data      |
 | Real Estate Investment         | 부동산 투자 의사결정 예측                     | XGBoost, Classification              |
 | Olist E-commerce Analysis      | 브라질 E-commerce 데이터를 활용한 고객 및 셀러 분석 | EDA, RFM, Customer Analysis          |
-| Poverty Prediction             | 가구 설문 데이터를 활용한 빈곤 수준 예측            | Regression, Machine Learning         |
+| Poverty Prediction             | Poverty Prediction Challenge에서 가구 설문 데이터를 활용해 소비 및 빈곤 수준을 예측하고, 다양한 전처리·모델링 전략을 비교            | Regression, Feature Engineering, Machine Learning         |
 
 ## Study
 
