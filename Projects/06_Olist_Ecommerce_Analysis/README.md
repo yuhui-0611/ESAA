@@ -97,12 +97,6 @@ Hyperparameter Optimization에는 **Optuna**를 활용했습니다.
 
 F1-score에서는 LightGBM이 소폭 높은 성능을 보였으며, ROC-AUC에서는 XGBoost가 더 높은 성능을 보였습니다.
 
-### Model Comparison
-
-![Model Performance Comparison](./images/model_comparison.png)
-
----
-
 ## SHAP Analysis
 
 ![SHAP Summary Plot](./images/shap_summary.png)
