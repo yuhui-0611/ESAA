@@ -1,4 +1,4 @@
-# 1. Hotel Reservation Cancellation Prediction
+# Hotel Reservation Cancellation Prediction
 
 호텔 예약 데이터를 활용하여 고객의 **예약 취소 여부를 예측**하는 머신러닝 프로젝트입니다.
 
