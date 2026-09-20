@@ -161,7 +161,13 @@ SHAP 분석을 통해 셀러 이탈 예측에서 어떤 변수가 중요한 역�
 
 ## Tech Stack
 
-`Python` `Pandas` `NumPy` `Scikit-learn` `XGBoost` `LightGBM` `Optuna` `SHAP` `NLP` `Matplotlib` `Seaborn`
+`Python` `Pandas` `NumPy` `Scikit-learn`
+`XGBoost` `LightGBM` `Optuna` `SHAP`
+`Matplotlib` `Seaborn`
+
+## Analysis Techniques
+
+`RFM` `NLP` `Sentiment Analysis` `LDA` `Feature Engineering`
 
 ---
 
