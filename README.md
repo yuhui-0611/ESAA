@@ -44,20 +44,16 @@
 ## Tech Stack
 
 ### Data Analysis
-
 `Python` `Pandas` `NumPy` `Matplotlib` `Seaborn`
 
 ### Machine Learning
-
 `Scikit-learn` `XGBoost` `LightGBM` `CatBoost` `Optuna`
 
-### Deep Learning & NLP
+### Deep Learning
+`PyTorch` `TensorFlow` `Keras`
 
-`PyTorch` `TensorFlow` `Keras` `NLP` `TF-IDF`
-
-### Model Interpretation
-
-`SHAP`
+### Analysis Techniques
+`EDA` `Feature Engineering` `NLP` `TF-IDF` `RFM` `SHAP`
 
 ## Repository Structure
 
