@@ -4,7 +4,7 @@
 
 ## 문제 정의
 - 브라질 E-commerce 플랫폼 Olist의 고객·주문·상품·판매자 데이터를 이용해 **셀러 이탈을 예측**하고, 어떤 판매·배송·고객경험 특성이 이탈 예측과 연관되는지 분석함
--거래만 활용하는 모델에서 출발해 **리뷰 텍스트 기반 표현**을 추가하고, 트리 기반 학습과 신경망 모델을 같은 과제에서 비교함
+- 거래만 활용하는 모델에서 출발해 **리뷰 텍스트 기반 표현**을 추가하고, 트리 기반 학습과 신경망 모델을 같은 과제에서 비교함
 
 ## Dataset & Data Pipeline
 - *Brazilian E-Commerce Public Dataset by Olist*: `customers`, `orders`, `order_items`, `payments`, `products`, `reviews`, `sellers` 등
