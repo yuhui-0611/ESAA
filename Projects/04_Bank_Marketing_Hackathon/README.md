@@ -1,21 +1,38 @@
-# Bank Marketing Hackathon | 불균형 고객 반응 예측
+# Bank Marketing Hackathon | 불균형 고객 반응 예측과 의사결정 임계값 탐색
 
-**정기예금 가입 여부 예측에서 클래스 불균형, 분류 임계값 및 모델 결합 가중치의 영향을 실험**
+> **핵심:** 정기예금 가입 반응 예측. 불균형 클래스 대응, 특성 선택, 예측확률 임계값·앙상블 가중치 조합 실험.
 
 ## 문제 정의
-- **예측 대상:** `TermDepositSubscribed` (정기예금 가입 여부)
-- **주요 기술:** LightGBM, CatBoost, Class Weight, Stratified K-Fold, F1 Threshold Search
+은행 마케팅 캠페인의 정기예금 가입 반응을 예측하는 이진 분류 과제. 클래스 불균형을 고려한 학습과 **분류 확률의 임계값 조정**을 중심으로 실험.
 
-## 주요 구현
-- **데이터 전처리:** 고객·캠페인 변수 정리, 범주형 처리 및 파생 변수 구성
-- **불균형 대응:** 클래스 가중치와 `scale_pos_weight` 등 적용 및 검증 결과 비교
-- **모델 학습:** LightGBM·CatBoost 분류기 학습, 특성 중요도 기반 변수 선택
-- **임계값 탐색:** 예측 확률의 분류 임계값을 조정하며 Precision·Recall·F1 변화 확인
-- **확률 앙상블:** 두 모델의 예측 확률을 가중 결합하고 가중치·임계값 조합 탐색
+## 분석 흐름
+1. `CreditScore`, `AccountLengthYears`, `TenureWithBank`, `InvestmentPortfolioValue`, `CallResponseScore`, `MarketingScore`, `ResponsePropensity` 등 결측 확인
+2. 변수형 변환·파생 변수 및 범주형 처리
+3. **LightGBM**으로 baseline F1 평가, **CatBoost**로 범주형 데이터 반영
+4. 특징 중요도 기반 제거 전후 성능 및 `class_weights` 처리 비교
+5. Validation 예측 확률에 대해 임계값을 격자 탐색하고 **F1 최대 구간** 확인
+6. CatBoost–LightGBM 확률 가중 결합과 임계값을 함께 탐색
 
-## 분석 결과
-- 임계값 `0.5` 고정 시점과 최적화 시점의 F1 비교
-- 모델별 클래스 가중치·특성 축소·확률 결합의 효과 검토
+## 심화 실험 — 확률과 판정 기준의 분리
+기본 확률 임계값 `0.5`만 사용하는 대신 다음과 같이 검증셋에서 여러 기준을 비교함.
 
-## 코드
-[bank_marketing_prediction.ipynb](./bank_marketing_prediction.ipynb) — 전처리, 불균형 분류, 임계값·앙상블 탐색
+```python
+thresholds = np.linspace(0.05, 0.95, 181)
+f1s = [f1_score(y_valid, (proba_valid >= t).astype(int)) for t in thresholds]
+```
+
+또한 중요도 기준으로 피처를 선택하거나 모델 예측확률을 가중 평균하여, **특성 선택과 분류 임계값 변화에 따른 Precision·Recall·F1 차이**를 탐색함.
+
+## 실험 결과 및 분석
+
+- **초기 검증 F1 0.5001:** LightGBM 기준 실험의 검증 분할 기록.
+- **임계값 탐색:** CatBoost 실험에서 검증 F1이 최대인 분류 기준 약 **0.423** 기록.
+- **핵심 관찰:** 학습된 확률을 동일한 모델이라도 어느 임계값에서 양성으로 분류하는지에 따라 Precision·Recall·F1 변화.
+- **앙상블 검토:** LightGBM·CatBoost의 예측확률을 혼합하고, 가중치와 분류 기준을 함께 탐색.
+
+**실험 지표:** 검증 분할의 F1 기준으로 임계값과 앙상블 가중치 선택. 비용·수익 추정이 아닌 가입 반응 예측 성능에 초점.
+
+## File
+- [`bank_marketing_prediction.ipynb`](./bank_marketing_prediction.ipynb): 전체 전처리, 분류 모델 및 임계값/앙상블 실험
+
+**Stack** `Python` `Pandas` `Scikit-learn` `LightGBM` `CatBoost` `F1 optimization`
