@@ -27,6 +27,7 @@
 | [`04_Regression_Tree.ipynb`](./04_Regression_Tree.ipynb) | 트리/부스팅/앙상블 비교 |
 | [`05_Final_Model.ipynb`](./05_Final_Model.ipynb) | 최종 예측 및 결합 |
 
-> 이 프로젝트는 **회귀 및 머신러닝 앙상블** 사례입니다. 
+> 이 프로젝트는 **회귀 및 머신러닝 앙상블** 사례입니다.
+
 **Stack** `Python` `Pandas` `Scikit-learn` `XGBoost` `LightGBM` `GridSearchCV` `Matplotlib`
 
