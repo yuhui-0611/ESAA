@@ -1,25 +1,36 @@
-# Author Classification NLP | 문체 특징 기반 작가 분류
+# Author Classification | 텍스트 표현·임베딩·OOF 앙상블 비교
 
-**소설 텍스트를 어휘·문체·사전학습 임베딩 특징으로 변환하고 여러 분류 모델을 결합한 5개 클래스 작가 분류**
+> **핵심:** 작가의 문체·어휘 정보를 희소 벡터와 사전학습 임베딩으로 수치화. OOF 예측과 다중 모델 확률 앙상블 구성.
 
 ## 문제 정의
-- **예측 대상:** 주어진 텍스트의 작가 클래스 (5개)
-- **주요 기술:** TF-IDF, CountVectorizer, Word/Character N-gram, GloVe, Logistic Regression, Naive Bayes, XGBoost, LightGBM
+소설의 짧은 텍스트만으로 작가를 **5개 클래스 중 하나로 분류**하는 자연어 처리 경진대회 문제를 다룸. 텍스트 길이와 단어 분포뿐 아니라 문장부호·불용어·통계적 문체 특징이 식별력을 가질 수 있는지 검토함.
 
-## 주요 구현
-- **문체 특징 분석:** 작가별 단어 빈도, 텍스트 길이, 불용어·문장부호 분포 탐색
-- **희소 텍스트 특징 생성:** Word·Character N-gram 기반 TF-IDF 및 CountVectorizer 적용
-- **사전학습 표현 활용:** GloVe 100차원 단어 벡터를 조회하고, 합산·L2 정규화 방식으로 문장별 밀집 벡터 생성
-- **OOF 메타 특징:** 교차검증에서 생성한 클래스별 예측 확률을 후속 모델 입력 특징으로 활용
-- **분류·앙상블:** Logistic Regression, Naive Bayes, XGBoost, LightGBM 및 예측 확률 결합 비교
-- **평가 지표:** 다중 클래스 LogLoss·Accuracy
+## 분석 파이프라인
+1. 작가별 텍스트 수·길이, 불용어, n-gram, WordCloud 등 EDA
+2. 텍스트 전처리 및 문장부호·불용어·길이 등 문체 특징 생성
+3. **Word/Character Count 및 TF-IDF** 표현 실험
+4. **GloVe 사전학습 단어벡터**를 평균화한 문장 수준 표현(`sent2vec`) 생성
+5. Multinomial Naive Bayes, Logistic Regression, XGBoost, LightGBM 등 분류기 학습 및 **LogLoss** 평가
+6. **교차검증 OOF(out-of-fold) 확률**을 생성해 다중 모델의 확률 앙상블 비교
 
-## 분석 결과
-- 단어 출현 빈도뿐 아니라 문자 단위 문체·사전학습 단어 임베딩을 분류 특징으로 활용
-- OOF 기반 확률 특징 생성 및 모델별 확률 출력 비교
+## 모델링 및 실험 결과
 
-## 코드
-| Notebook | 내용 |
-|---|---|
-| [01_EDA](./01_EDA.ipynb) | 텍스트 탐색 및 문체 분석 |
-| [02_Modeling](./02_Modeling.ipynb) | TF-IDF·GloVe 특징 생성, 분류기·OOF·앙상블 |
+- **Word/Character TF-IDF·Count 비교:** 어휘 및 철자 패턴이 분류에 미치는 영향 탐색. 8-Fold CV 기반 Multinomial Naive Bayes의 표현별 LogLoss 비교.
+- **GloVe 100차원 표현:** 사전학습 단어벡터 조회 → 문장별 벡터 합산 → L2 정규화 → 분류 모델 입력 특성 생성.
+- **OOF 메타 특징:** 폴드 외부 데이터에 대한 클래스별 확률을 생성하여 후속 앙상블 입력 특성으로 사용.
+- **평가 지표:** 5개 클래스의 확률 품질을 고려한 다중 클래스 LogLoss.
+
+| 비교 실험 | LogLoss | 측정 조건 |
+|---|---:|---|
+| Word TF-IDF + Multinomial NB | **1.0899** | 8-Fold CV 평균 |
+| Character TF-IDF + Multinomial NB | **0.9831** | 8-Fold CV 평균 |
+| Word Count + Multinomial NB | **0.9922** | 8-Fold CV 평균 |
+| XGBoost 분류 실험 | **0.4534** | 단일 검증 분할, 다중 클래스 LogLoss |
+
+**분석 결과:** 8-Fold Multinomial NB 실험에서 Character TF-IDF(0.9831)가 Word TF-IDF(1.0899)보다 낮은 LogLoss 기록. 문자 단위 표현이 작가별 철자·표기 패턴을 포착하는 데 유효한 결과 확인.
+
+## Files
+- [`01_EDA.ipynb`](./01_EDA.ipynb): 데이터 탐색, 작가별 단어 특성 분석
+- [`02_Modeling.ipynb`](./02_Modeling.ipynb): 텍스트 벡터화, GloVe, 분류기, OOF/앙상블
+
+**Stack** `Python` `Scikit-learn` `TF-IDF` `CountVectorizer` `GloVe` `XGBoost` `LightGBM`
