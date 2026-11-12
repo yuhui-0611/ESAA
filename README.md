@@ -9,7 +9,7 @@
 ### 01 | Transformer NLP + PyTorch Deep Learning — Olist 셀러 이탈 분석
 - Olist 관계형 거래 테이블을 주문·고객·셀러 단위로 연결하고, 구매·배송·리뷰 특징량을 생성했습니다.
 - `cardiffnlp/twitter-xlm-roberta-base-sentiment` **사전학습 Transformer**를 사용해 리뷰 텍스트의 감성 라벨/점수를 추론하고 정형 데이터와 결합했습니다. (*파인튜닝이 아닌 사전학습 모델 활용*)
-- **PyTorch MLP (64→32→1, ReLU·Dropout)**를 직접 구현하고, BCEWithLogitsLoss·Adam·Early Stopping 및 **5개 시드 반복 실험**으로 트리 모델과 비교했습니다.
+- PyTorch MLP (64→32→1, ReLU·Dropout)를 직접 구현하고, BCEWithLogitsLoss·Adam·Early Stopping 및 **5개 시드 반복 실험**으로 트리 모델과 비교했습니다.
 - MLP의 F1 **0.646**, ROC-AUC **0.799**; 5회 반복 실험 평균 F1 **0.648±0.005**, AUC **0.797±0.002**. XGBoost·LightGBM과의 비교를 통해 모델 복잡도보다 데이터 특성에 적합한 접근의 중요성을 확인했습니다.
 - [프로젝트 상세 보기](./Projects/06_Olist_Ecommerce_Analysis)
 
