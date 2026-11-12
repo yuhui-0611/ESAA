@@ -25,7 +25,7 @@ Accuracy, Precision, Recall, F1, ROC-AUC, Confusion Matrix, Classification Repor
 - Optuna 기반 자동 튜닝 및 Feature Selection
 - 분류 성능 및 오류 유형을 함께 비교
 
-> 본 프로젝트는 실제 노트북 기준 **머신러닝 앙상블 최적화** 사례입니다. 신경망 학습이나 시뮬레이션 수행 사실은 확인되지 않아 해당 표현은 사용하지 않았습니다.
+> 본 프로젝트는 **머신러닝 앙상블 최적화** 사례입니다. 
 
 ## File
 - [`hotel_reservation_prediction.ipynb`](./hotel_reservation_prediction.ipynb): 데이터 분석·전처리·모델 비교 및 탐색
