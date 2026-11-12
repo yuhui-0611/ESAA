@@ -1,8 +1,8 @@
 # ESAA | Data Analytics · Machine Learning · Deep Learning
 
-**7개 데이터 분석 프로젝트 | 모델 설계·검증, 자연어 처리, 딥러닝, 앙상블·시나리오 실험**
+**7개 프로젝트 | 예측 모델링 · 딥러닝 · NLP · 실험 설계 · 설명 가능한 AI(XAI)**
 
-데이터 분석 학회 ESAA 활동 중 수행한 프로젝트와 학습 기록. 정형 데이터 예측을 시작으로 **사전학습 Transformer 기반 리뷰 분석, PyTorch 신경망 직접 학습, 빈곤율 추정 목적함수 설계, 다년도 데이터 통합 및 SHAP 모델 해석**까지 확장.
+데이터 분석 학회 **ESAA**에서 수행한 프로젝트와 학습 기록. 데이터 전처리·가설 검증부터 머신러닝 모델 비교, **PyTorch 신경망 직접 구현**, **Transformer 기반 리뷰 감성 추론**, **빈곤율 중심 복합 평가**, **SHAP 해석**까지 수행.
 
 ## 대표 프로젝트
 
@@ -10,7 +10,7 @@
 |---|---|---|
 | **[Olist E-commerce](./Projects/06_Olist_Ecommerce_Analysis)** | 리뷰·거래 데이터 기반 고객 분석 및 셀러 이탈 분류 | **XLM-RoBERTa 감성 추론, PyTorch MLP(64→32→1), Early Stopping, 5회 시드 실험, XGBoost·LightGBM 비교, SHAP** |
 | **[Poverty Prediction](./Projects/07_Poverty_Prediction)** | 가구 소비액과 조사별 빈곤율 동시 평가 | **19개 빈곤선, 빈곤율 90%+소비 오차 10% 복합 평가, GroupShuffleSplit, XGBoost·CatBoost 앙상블, 임계값 보정** |
-| **[Real Estate Investment](./Projects/05_Real_Estate_Investment)** | 가구의 부동산 투자 의향 분류 | **2019–2025년 데이터 통합, XGBoost, SHAP; 무작위 홀드아웃 F1 0.6816 / ROC-AUC 0.7443** |
+| **[Real Estate Investment](./Projects/05_Real_Estate_Investment)** | 가구의 부동산 투자 의향 분류 | **2019–2025년 조사 데이터 통합, XGBoost, SHAP; 20% 무작위 홀드아웃 F1 0.6816 / ROC-AUC 0.7443** |
 
 ## 전체 프로젝트
 
@@ -26,7 +26,7 @@
 
 ## 딥러닝·심화 학습
 
-프로젝트에서 적용한 모델과 별도로 `Study/OB`에 **PyTorch 모델 학습, CNN, RNN/LSTM, 시계열, 생성 모델, NLP·추천 시스템** 실습 정리. 학습용 노트북과 실전 프로젝트 구현을 구분.
+`Study/OB`에 **PyTorch, CNN, RNN/LSTM, 시계열, 생성 모델, NLP·추천 시스템** 학습 노트북 정리. 실전 프로젝트에서 직접 학습한 PyTorch MLP와 사전학습 Transformer 추론은 프로젝트별 README에 별도 수록.
 
 | 영역 | 코드 |
 |---|---|
@@ -42,4 +42,4 @@
 - **Machine Learning:** scikit-learn, XGBoost, LightGBM, CatBoost, Optuna
 - **Data & XAI:** Python, Pandas, NumPy, Matplotlib, Seaborn, SHAP
 
-> 프로젝트별 README에 문제 정의, 데이터 처리, 핵심 모델 설계, 수치의 평가 조건, 분석 결과 및 노트북 링크 수록
+프로젝트별 README에 **문제 정의 → 데이터 처리 → 주요 모델·실험 → 성능 및 분석 결과 → 코드** 순서로 기록
