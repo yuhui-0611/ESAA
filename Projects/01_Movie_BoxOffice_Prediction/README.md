@@ -1,4 +1,4 @@
-# Movie Box Office Prediction | 가설 검증부터 회귀 앙상블까지
+# Movie Box Office Prediction | 가설 검증 및 회귀 앙상블
 
 > **핵심:** 개봉 전 영화 메타데이터 기반 관객 수 예측. 흥행 요인 가설 검토, 회귀 모델별 5-Fold CV, XGBoost·Ridge 예측 결합 실험
 
@@ -16,7 +16,7 @@
 
 ## 주요 실험 결과
 
-| 실험 | 노트북 기록 지표 | 평가 조건 |
+| 실험 | 기록 지표 | 평가 조건 |
 |---|---:|---|
 | Ridge (`alpha=10`) | RMSE **2.136** | 규제 회귀 5-Fold CV 평균 |
 | Random Forest (튜닝) | RMSE **1.9213** | GridSearchCV 5-Fold CV 최적 점수 |
