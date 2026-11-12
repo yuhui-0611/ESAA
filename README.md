@@ -14,8 +14,8 @@
 - [프로젝트 상세 보기](./Projects/06_Olist_Ecommerce_Analysis)
 
 ### 02 | Threshold-based Poverty Estimation — 소비·빈곤 동시 예측
-- 가구별 소비액을 회귀 예측한 뒤, **19개 빈곤선(threshold)**에 대한 빈곤율을 조사(survey) 단위로 재계산했습니다.
-- **빈곤율 오차 90% + 소비 오차 10%**의 복합 목적함수를 직접 구성하고, LightGBM·XGBoost·CatBoost의 **앙상블 가중치를 탐색**했습니다.
+- 가구별 소비액을 회귀 예측한 뒤, 19개 빈곤선(threshold)에 대한 빈곤율을 조사(survey) 단위로 재계산했습니다.
+- 빈곤율 오차 90% + 소비 오차 10%의 복합 목적함수를 직접 구성하고, LightGBM·XGBoost·CatBoost의 **앙상블 가중치를 탐색**했습니다.
 - 임계값 근처의 불확실한 예측을 **Random Forest 빈곤확률**로 재분류하는 규칙 기반 보정 실험을 진행했습니다.
 - 이는 **임계값·가중치·예측 보정에 대한 시나리오 비교**이며, 확률표본을 반복 생성하는 *Monte Carlo 시뮬레이션*이라고 주장하지 않습니다.
 - [프로젝트 상세 보기](./Projects/07_Poverty_Prediction)
