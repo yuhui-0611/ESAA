@@ -1,46 +1,40 @@
-# Real Estate Investment | 7개 연도 패널형 가구 데이터 통합과 XAI
+# Real Estate Investment | 다년도 가구 데이터 기반 투자 의사결정 분석
 
-> **프로젝트 핵심:** 2019–2025년 가구자료를 통합해 투자 의사결정을 분류하고, **XGBoost + SHAP**으로 예측 근거를 해석했습니다.
+**2019–2025년 가구 조사 자료를 통합하고 XGBoost 분류·SHAP 분석으로 부동산 투자 의향 관련 예측 요인 탐색**
 
-## 문제 정의 및 데이터
-가구주의 인구·주거·재무 특성이 `investment_decision`과 어떤 관계에 있는지 탐색했습니다. 2019~2025년 연도별 데이터를 불러와, **서로 다른 변수명을 공통 변수 체계로 재매핑**한 뒤 분석용 데이터를 구축했습니다.
+## 문제 정의
+- **예측 대상:** `investment_decision` (부동산 투자 의향 분류)
+- **데이터:** 2019–2025년 가구 조사 자료
+- **주요 기술:** 데이터 통합, XGBoost, Feature Importance, SHAP
 
-주요 변수: `head_age`, `own_house`, `year`, 자산·부채·소득·지출, 가구 구성, 대출 상환 관련 변수 등.
+## 주요 구현
+- **다년도 데이터 통합:** 연도별 상이한 컬럼명·변수 코드 정리 및 공통 특징 체계 구성
+- **전처리:** 연령, 주택 소유, 자산·부채·소득·지출 변수 정제 및 특성 구성
+- **분류 모델:** `XGBClassifier` 학습, 계층화 무작위 80:20 분할로 성능 평가
+- **모델 해석:** Feature Importance 및 SHAP TreeExplainer로 변수별 예측 기여도·방향 확인
 
-## 분석 및 모델링 과정
-1. 연도별 파일 로드 → 공통 변수 선정 → 컬럼명 표준화 → 연도 변수 추가 → 병합
-2. 데이터형·결측 및 코드형 변수 확인, 더미변수 생성, 이상치·상관관계 검토
-3. Train/Test 분리 후 **XGBClassifier** 학습
-4. Accuracy·Precision·Recall·F1·ROC-AUC 및 혼동행렬 평가
-5. **Feature Importance(gain)와 SHAP TreeExplainer**를 이용한 전역/방향성 해석
+## 모델 평가
 
-## 저장된 실험 성능
-
-| Metric | Score |
+| 지표 | 무작위 홀드아웃 결과 |
 |---|---:|
 | Accuracy | 0.6830 |
-| Precision | 0.6577 |
-| Recall | 0.7074 |
-| F1-score | 0.6816 |
-| ROC-AUC | 0.7443 |
+| F1-score | **0.6816** |
+| ROC-AUC | **0.7443** |
 
-## Explainable AI
+- **평가 조건:** `train_test_split(test_size=0.2, stratify=y, random_state=42)`
+- **해석 범위:** 연도별 미래 예측 검증이 아닌, 통합 데이터의 무작위 분할 평가
 
-![Feature importance](./images/feature_importance.png)
+## 분석 결과
+- 연도별 가구 자료의 변수 구조를 통일해 단일 분류 데이터셋 구성
+- 연령·주택 소유 여부·조사 연도 등 주요 특징에 대한 SHAP 기여도 확인
 
-![SHAP summary](./images/shap_summary.png)
+![XGBoost Feature Importance](./images/feature_importance.png)
 
-- `head_age`, `own_house`, `year` 등이 중요한 변수로 나타났습니다.
-- Feature Importance가 **무엇이 중요한지** 보여준다면, SHAP은 **개별 관측치의 예측값에 어떤 방향으로 작용하는지** 해석하도록 도와줍니다.
-- 연도 변수가 중요하다고 해서 **금리 변화의 인과효과를 식별했다**고 주장할 수는 없습니다. 연도는 같은 기간의 다양한 외부 변화를 포괄할 수 있습니다.
+![SHAP Summary](./images/shap_summary.png)
 
-## 분석의 가치와 한계
-- **데이터 통합:** 다년도 원천 테이블의 변수 체계를 표준화
-- **해석 가능성:** 예측 성능과 변수 기여도를 함께 제시
-- **주의:** SHAP은 모델의 예측 기여도이며 인과 추정은 아닙니다. 시계열 외삽 성능은 별도 연도 홀드아웃 검증이 필요합니다.
+## 코드
+| Notebook | 내용 |
+|---|---|
+| [01_Data_Analysis](./01_Data_Analysis.ipynb) | 다년도 자료 정제·통합 및 EDA |
+| [02_Final_XGBoost_Model](./02_Final_XGBoost_Model.ipynb) | XGBoost 학습·홀드아웃 평가, SHAP 분석 |
 
-## Files
-- [`01_Data_Analysis.ipynb`](./01_Data_Analysis.ipynb): 연도별 정제·통합 및 EDA
-- [`02_Final_XGBoost_Model.ipynb`](./02_Final_XGBoost_Model.ipynb): XGBoost 성능 검증, 중요도/SHAP 시각화
-
-**Stack** `Python` `Pandas` `XGBoost` `SHAP` `Scikit-learn` `Matplotlib` `Seaborn`
