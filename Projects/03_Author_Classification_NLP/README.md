@@ -1,54 +1,25 @@
-# Author Classification using NLP
+# Author Classification | 텍스트 표현·임베딩·OOF 앙상블 비교
 
-소설 텍스트 데이터를 활용하여 **텍스트의 작가를 분류하는 NLP 프로젝트**입니다.
+> **프로젝트 핵심:** 작가별 문체 특성을 수치화하고, **TF-IDF/Count 기반 특징과 사전학습 GloVe 임베딩**, 여러 분류기의 **OOF 예측 및 확률 앙상블**을 비교했습니다.
 
-## Project Overview
+## 문제 정의
+소설의 짧은 텍스트만으로 작가를 **5개 클래스 중 하나로 분류**하는 자연어 처리 경진대회 문제를 다뤘습니다. 텍스트 길이와 단어 분포뿐 아니라 문장부호·불용어·통계적 문체 특징이 식별력을 가질 수 있는지 검토했습니다.
 
-작가마다 사용하는 단어와 표현 방식에는 일정한 특징이 존재할 수 있습니다.
-본 프로젝트에서는 소설 텍스트를 정제하고 벡터화하여 텍스트에 나타나는 특징을 추출한 뒤, 이를 이용해 작가를 분류했습니다.
+## 분석 파이프라인
+1. 작가별 텍스트 수·길이, 불용어, n-gram, WordCloud 등 EDA
+2. 텍스트 전처리 및 문장부호·불용어·길이 등 문체 특징 생성
+3. **Word/Character Count 및 TF-IDF** 표현 실험
+4. **GloVe 사전학습 단어벡터**를 평균화한 문장 수준 표현(`sent2vec`) 생성
+5. Logistic Regression, XGBoost, LightGBM 등 분류기를 학습하고 **LogLoss** 기반 성능 평가
+6. **교차검증 OOF(out-of-fold) 확률**을 생성해 다중 모델의 확률 앙상블 비교
 
-EDA와 Modeling 과정을 분리하여 텍스트 데이터의 특성을 먼저 탐색한 후 분류 모델을 구축했습니다.
-
-## Analysis Process
-
-### 1. Exploratory Data Analysis
-
-* 데이터 구조 확인
-* 작가별 데이터 분포 확인
-* 텍스트 길이 분석
-* 단어 및 표현 특성 탐색
-
-### 2. Text Preprocessing
-
-텍스트 데이터를 모델 학습에 사용할 수 있도록 정제했습니다.
-
-### 3. Feature Extraction
-
-텍스트를 수치형 데이터로 변환하기 위해 다음과 같은 방법을 활용했습니다.
-
-* CountVectorizer
-* TF-IDF
-
-### 4. Modeling
-
-벡터화된 텍스트 데이터를 활용하여 작가 분류 모델을 구축하고 성능을 비교했습니다.
-
-## Key Point
-
-일반적인 정형 데이터가 아니라 **텍스트 데이터를 직접 전처리하고 벡터화하여 머신러닝 모델의 입력으로 활용했다는 점**에 초점을 둔 프로젝트입니다.
-
-텍스트 데이터의 표현 방법에 따라 모델의 성능이 달라질 수 있기 때문에 데이터 전처리와 Feature Extraction 과정이 중요했습니다.
-
-## Tech Stack
-
-`Python` `Pandas` `NumPy` `Scikit-learn` `NLP` `TF-IDF` `CountVectorizer` `Matplotlib` `Seaborn`
+## 핵심 구현 포인트
+- **희소 벡터와 밀집 벡터의 비교:** 표면적 단어 빈도/문체 특징과 단어 임베딩 기반 의미 표현의 차이를 실험했습니다.
+- **OOF 예측:** 학습 폴드와 예측 폴드를 분리해 앙상블 실험에 사용할 클래스 확률을 생성했습니다.
+- **LogLoss:** 정확도만이 아니라 5개 클래스에 대한 예측확률의 신뢰도를 평가했습니다.
 
 ## Files
+- [`01_EDA.ipynb`](./01_EDA.ipynb): 데이터 탐색, 작가별 단어 특성 분석
+- [`02_Modeling.ipynb`](./02_Modeling.ipynb): 텍스트 벡터화, GloVe, 분류기, OOF/앙상블
 
-```text
-03_Author_Classification_NLP/
-├── README.md
-├── 01_EDA.ipynb
-└── 02_Modeling.ipynb
-```
-
+**Stack** `Python` `Scikit-learn` `TF-IDF` `CountVectorizer` `GloVe` `XGBoost` `LightGBM`
