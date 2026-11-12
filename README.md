@@ -20,7 +20,7 @@
 | [01. Movie Box Office Prediction](./Projects/01_Movie_BoxOffice_Prediction) | 흥행 요인 탐색, 타깃 로그 변환, 규제 회귀·XGBoost 비교, 5-Fold CV |
 | [02. Hotel Reservation Cancellation](./Projects/02_Hotel_Reservation_Cancellation) | 고객 예약 취소 분류, 특성 선택, Optuna, 트리 앙상블 및 오류 분석 |
 | [03. Author Classification NLP](./Projects/03_Author_Classification_NLP) | Word/Character TF-IDF, GloVe, OOF 확률, XGBoost·LightGBM |
-| [04. Bank Marketing Hackathon](./Projects/04_Bank_Marketing_Hackathon) | **PCA·K-Means 고객 세분화**, 금융 행동 파생변수 설계, XGBoost·LightGBM·CatBoost 등 불균형 분류, **Optuna 및 가중 하드 보팅** |
+| [04. Bank Marketing Hackathon](./Projects/04_Bank_Marketing_Hackathon) | PCA·K-Means 고객 세분화, 금융 행동 파생변수 설계, XGBoost·LightGBM·CatBoost 등 불균형 분류, Optuna 및 가중 하드 보팅 |
 | [05. Real Estate Investment](./Projects/05_Real_Estate_Investment) | 다년도 변수 표준화, XGBoost, Feature Importance·SHAP |
 | [06. Olist E-commerce Analysis](./Projects/06_Olist_Ecommerce_Analysis) | Transformer 추론, PyTorch 신경망 학습, 고객·판매자 분석 |
 | [07. Poverty Prediction Challenge](./Projects/07_Poverty_Prediction) | 소비 예측→빈곤율 집계, 복합 평가·가중치 탐색, 임계값 민감도 실험 |
